@@ -5,7 +5,7 @@
 ** Login   <sebastien@epitech.net>
 **
 ** Started on  Sat Dec 21 21:19:58 2013 Sebastien Chapuis
-** Last update Sun Dec 22 11:51:45 2013 Sebastien Chapuis
+** Last update Sun Jan  5 20:52:20 2014 Sebastien Chapuis
 */
 
 #include <unistd.h>
@@ -67,7 +67,7 @@ int	my_strcmp(char *s1, char *s2)
   return (0);
 }
 
-int	is_good_param(char *str, int *verbose)
+int	is_good_param(char *str, int *verbose, int *reverse)
 {
   int	i;
 
@@ -75,6 +75,11 @@ int	is_good_param(char *str, int *verbose)
   if (str && str[0] == '-' && str[1] == 'v' && str[2] == 0)
   {
     *verbose = 1;
+    return (0);
+  }
+  if (str && str[0] == '-' && str[1] == 'r' && str[2] == 0)
+  {
+    *reverse = 1;
     return (0);
   }
   while (str[i])
@@ -108,7 +113,8 @@ int	usage(int argc, char **argv)
     is_help = 1;
   if (is_help == 0)
     return (0);
-  my_putstr("usage: ./push_swap [-v] [NB1 NB2...]\n\n");
+  my_putstr("usage: ./push_swap [OPTION]... [NB1 NB2...]\n\n");
+  my_putstr("\t-r      reverse sort\n");
   my_putstr("\t-v      print state of list each step\n");
   my_putstr("\t--help  print this message\n");
   return (1);

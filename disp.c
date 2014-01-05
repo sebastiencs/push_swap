@@ -5,7 +5,7 @@
 ** Login   <sebastien@epitech.net>
 **
 ** Started on  Sun Dec 22 11:34:13 2013 Sebastien Chapuis
-** Last update Sun Dec 22 11:56:25 2013 Sebastien Chapuis
+** Last update Sun Jan  5 21:34:42 2014 Sebastien Chapuis
 */
 
 #include <unistd.h>
@@ -41,42 +41,20 @@ static void	disp_root(t_list *root)
     tmp = tmp->next;
   }
 }
-/* static void	disp_a(t_list *root_a) */
-/* { */
-/*   t_list	*tmp; */
 
-/*   tmp = root_a->next; */
-/*   while (tmp != root_a) */
-/*   { */
-/*     my_putnbr(tmp->nb); */
-/*     if (tmp->next != root_a) */
-/*       my_putchar(' '); */
-/*     tmp = tmp->next; */
-/*   } */
-/* } */
-
-/* static void	disp_b(t_list *root_b) */
-/* { */
-/*   t_list	*tmp; */
-
-/*   tmp = root_b->next; */
-/*   while (tmp != root_b) */
-/*   { */
-/*     my_putnbr(tmp->nb); */
-/*     if (tmp->next != root_b) */
-/*       my_putchar(' '); */
-/*     tmp = tmp->next; */
-/*   } */
-/* } */
-
-void		disp_list(t_list *root_a, t_list *root_b, int is_last)
+void		disp_list(t_list *root_a, t_list *root_b, int is_last,
+			  int reverse)
 {
   static int	is_first;
 
-  my_putstr((is_first++ == 0) ? ("l_a ") : ("\nl_a "));
+  my_putstr((is_first++ == 0) ? ("l_a ") :
+	    (root_a->nb_elem == 0) ? ("\nl_a") : ("\nl_a "));
   disp_root(root_a);
   my_putstr("\n");
-  my_putstr("l_b ");
+  my_putstr((root_b->nb_elem == 0) ? ("l_b") : ("l_b "));
   disp_root(root_b);
-  my_putstr((is_last == 0) ? ("\n\n") : ("\n"));
+  if (root_b->nb_elem == 0 && is_sort(root_a, reverse) == 1)
+    my_putstr("\n");
+  else
+    my_putstr((is_last == 0) ? ("\n\n") : ("\n"));
 }
